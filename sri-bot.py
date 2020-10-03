@@ -46,4 +46,3 @@ dp.add_handler(CommandHandler('on',light_on))
 dp.add_handler(CommandHandler('off',light_off))
 u.start_polling()
 u.idle()
-
