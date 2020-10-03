@@ -1,13 +1,15 @@
 !pip install adafruit-io
 !pip install python-telegram-bot
 
+import os
+
 from telegram.ext import Updater,CommandHandler
 import requests
 
 # 1. Python Code for Adafruit
 
-x = "laasyasri" #ADAFRUIT_IO_USERNAME
-y = "aio_cejb32ol8QqGws4ebkf15x0SQ0Fq" #ADAFRUIT_IO_KEY
+x = os.getenv('adafruit_io_username') #ADAFRUIT_IO_USERNAME
+y = os.getenv('adafruit_io_key') #ADAFRUIT_IO_KEY
 
 from Adafruit_IO import Client, Feed
 aio = Client(x,y)
@@ -37,7 +39,8 @@ def light_off(bot,update):
   bot.send_photo(chat_id,photo=url)
   send_value(0)
 
-u = Updater('1366445151:AAHf8_WqHFUzuDYEXLbg4chtnLO9F7G1CLE')
+telegram_bot_api = os.getenv('telegram_bot_api')
+u = Updater(telegram_bot_api)
 dp = u.dispatcher
 dp.add_handler(CommandHandler('on',light_on))
 dp.add_handler(CommandHandler('off',light_off))
